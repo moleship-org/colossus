@@ -87,7 +87,7 @@ await loadDefaults()
         </h2>
       </div>
 
-      <button type="button" class="inline-flex cursor-pointer items-center gap-2 text-sm text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white" @click="router.back()">
+      <button type="button" class="btn-ghost" @click="router.back()">
         <ArrowLeft class="size-4" />
         Back
       </button>
@@ -207,7 +207,7 @@ await loadDefaults()
       </label>
 
       <div class="flex flex-wrap gap-3 border-t border-neutral-200 pt-6 dark:border-neutral-800">
-        <button type="submit" :disabled="isSubmitting" class="inline-flex min-w-36 cursor-pointer items-center justify-center gap-2 border border-neutral-900 bg-neutral-900 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-neutral-700 disabled:cursor-not-allowed disabled:opacity-60 dark:border-white dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200">
+        <button type="submit" :disabled="isSubmitting" class="btn-fill min-w-36 px-5">
           <Save class="size-4" />
           {{ isSubmitting ? 'Saving...' : 'Save changes' }}
         </button>

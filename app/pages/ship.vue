@@ -41,7 +41,7 @@ async function handleLogout() {
                 <template #title>
                     <div class="flex items-center justify-between gap-4">
                         <h1 class="text-lg font-medium text-neutral-900 dark:text-white">
-                            Ship
+                            Colossus
                         </h1>
                         <button type="button"
                             class="logout-btn cursor-pointer text-xs text-neutral-500 dark:text-neutral-400"

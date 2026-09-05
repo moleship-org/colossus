@@ -276,7 +276,7 @@ await loadLibpodStatus()
 
                     <div>
                         <button type="submit" :disabled="isSubmitDisabled"
-                            class="inline-flex cursor-pointer min-w-27.5 items-center justify-center border border-neutral-900 bg-neutral-900 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-neutral-700 disabled:cursor-not-allowed disabled:opacity-60 dark:border-white dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200">
+                            class="btn-fill min-w-27.5 px-5">
                             {{ isStatusLoading ? 'Checking...' : isLoading ? 'Loading...' : method }}
                         </button>
                     </div>
@@ -289,7 +289,7 @@ await loadLibpodStatus()
                         </h2>
 
                         <button type="button" @click="addHeaderRow"
-                            class="text-xs font-medium text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white">
+                            class="btn-ghost text-xs font-medium">
                             Add header
                         </button>
                     </div>
@@ -301,7 +301,7 @@ await loadLibpodStatus()
                             <input v-model="row.value" type="text" placeholder="Header value"
                                 class="border border-neutral-200 bg-transparent px-3 py-2 text-sm text-neutral-900 outline-none placeholder:text-neutral-400 focus:border-neutral-900 dark:border-neutral-800 dark:text-white dark:placeholder:text-neutral-600 dark:focus:border-white">
                             <button type="button" @click="removeHeaderRow(row.id)"
-                                class="border border-neutral-200 px-3 py-2 text-sm text-neutral-600 transition-colors hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-800 dark:text-neutral-400 dark:hover:border-white dark:hover:text-white">
+                                class="btn-outline px-3">
                                 Remove
                             </button>
                         </div>

@@ -21,7 +21,7 @@ const session = useSessionStore()
                 Hello, <span class="font-bold">{{ session.username }}</span>!
             </p>
             <p>
-                Welcome to your own <a href="https://github.com/moleship-org/colossus" target="_blank">Colossus</a> instance. Here you can handle everything related to your local quadlet files.
+                Welcome to your own <a href="https://github.com/moleship-org/colossus" target="_blank">Colossus</a> instance. Here you can handle everything related to your local quadlet unit files.
             </p>
         </div>
     </div>

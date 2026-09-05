@@ -98,8 +98,7 @@ await loadContainer()
 </script>
 
 <template>
-  <div
-    <div class="flex flex-col gap-4 border border-neutral-200 bg-white/95 p-4 shadow-2xl shadow-neutral-200/40 backdrop-blur-xl dark:border-neutral-800 dark:bg-neutral-950/95 dark:shadow-black/20 md:gap-6 md:p-6">
+  <div class="flex flex-col gap-4 border border-neutral-200 bg-white/95 p-4 shadow-2xl shadow-neutral-200/40 backdrop-blur-xl dark:border-neutral-800 dark:bg-neutral-950/95 dark:shadow-black/20 md:gap-6 md:p-6">
     <div class="flex flex-wrap items-start justify-between gap-4">
       <div>
         <h2 class="mt-2 text-2xl font-medium text-neutral-900 dark:text-white">
@@ -109,7 +108,7 @@ await loadContainer()
 
       <button
         type="button"
-        class="inline-flex cursor-pointer items-center gap-2 text-sm text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+        class="btn-ghost"
         @click="router.back()">
         <ArrowLeft class="size-4" />
         Back
@@ -134,7 +133,7 @@ await loadContainer()
           <button
             type="button"
             :disabled="Boolean(activeOperation) || isLoading"
-            class="inline-flex cursor-pointer items-center gap-2 border border-neutral-200 px-4 py-2 text-sm text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900 disabled:cursor-not-allowed disabled:opacity-60 dark:border-neutral-800 dark:text-neutral-300 dark:hover:border-white dark:hover:text-white"
+            class="btn-outline"
             @click="runOperation('start')"
           >
             <Play class="size-4" />
@@ -143,7 +142,7 @@ await loadContainer()
           <button
             type="button"
             :disabled="Boolean(activeOperation) || isLoading"
-            class="inline-flex cursor-pointer items-center gap-2 border border-neutral-200 px-4 py-2 text-sm text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900 disabled:cursor-not-allowed disabled:opacity-60 dark:border-neutral-800 dark:text-neutral-300 dark:hover:border-white dark:hover:text-white"
+            class="btn-outline"
             @click="runOperation('stop')"
           >
             <Square class="size-4" />
@@ -152,7 +151,7 @@ await loadContainer()
           <button
             type="button"
             :disabled="Boolean(activeOperation) || isLoading"
-            class="inline-flex cursor-pointer items-center gap-2 border border-neutral-200 px-4 py-2 text-sm text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900 disabled:cursor-not-allowed disabled:opacity-60 dark:border-neutral-800 dark:text-neutral-300 dark:hover:border-white dark:hover:text-white"
+            class="btn-outline"
             @click="runOperation('restart')"
           >
             <RefreshCw class="size-4" />
@@ -161,7 +160,7 @@ await loadContainer()
           <button
             type="button"
             :disabled="Boolean(activeOperation) || isLoading"
-            class="inline-flex cursor-pointer items-center gap-2 border border-red-200 px-4 py-2 text-sm text-red-700 transition-colors hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-60 dark:border-red-900/60 dark:text-red-300 dark:hover:bg-red-950/40"
+            class="btn-danger"
             @click="runOperation('delete')"
           >
             <Trash2 class="size-4" />
@@ -177,7 +176,7 @@ await loadContainer()
           <div class="flex flex-wrap items-center justify-start gap-3">
             <NuxtLink
               :to="`/ship/containers/edit/${encodeURIComponent(name)}`"
-              class="inline-flex items-center gap-2 border border-neutral-900 bg-neutral-900 px-4 py-2 text-sm font-medium text-white! transition-colors hover:bg-neutral-700 dark:border-white dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200"
+              class="btn-fill"
             >
               <Pencil class="size-4 inline" />
               Edit

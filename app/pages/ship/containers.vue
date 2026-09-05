@@ -100,7 +100,7 @@ watch(
         <button
           type="button"
           :disabled="isLoading || isRefreshing"
-          class="inline-flex cursor-pointer items-center gap-2 border border-neutral-200 px-4 py-2 text-sm font-medium text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900 disabled:cursor-not-allowed disabled:opacity-60 dark:border-neutral-800 dark:text-neutral-300 dark:hover:border-white dark:hover:text-white"
+          class="btn-outline font-medium"
           @click="loadContainers('refresh')"
         >
           <RefreshCw class="size-4" :class="isRefreshing ? 'animate-spin' : ''" />
@@ -109,7 +109,7 @@ watch(
 
         <NuxtLink
           to="/ship/containers/new"
-          class="inline-flex items-center gap-2 border border-neutral-900 bg-neutral-900 px-4 py-2 text-sm font-medium text-white! transition-colors hover:bg-neutral-700 dark:border-white dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200"
+          class="btn-fill"
         >
             <Plus class="size-4 inline" />
             New container

@@ -48,19 +48,25 @@ async function handleSubmit() {
     <div class="flex min-h-[80vh] items-center justify-center px-4 py-16">
         <Grid :cols="1" class="w-full max-w-md shadow-xl" border="1">
             <GCell padding="p-10 md:p-12">
+                <template #icon>
+                    <div class="w-full text-center m-auto">
+                        <img src="~/images/icon.svg" alt="Mole sailor in a tiny boat" width="64" class="text-center m-auto">
+                    </div>
+                </template>
+
                 <template #title>
-                    <h1 class="text-2xl font-medium text-neutral-900 dark:text-white">
+                    <h1 class="text-2xl text-center m-auto mb-1 font-medium text-neutral-900 dark:text-white">
                         Colossus
                     </h1>
 
-                    <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+                    <p class="mt-1 text-sm text-neutral-500 mb-5 text-center dark:text-neutral-400">
                         Get ready to set sail on the moleship!
                     </p>
                 </template>
 
                 <template #body>
-                    <form class="mt-2 flex flex-col gap-6" @submit.prevent="handleSubmit">
-                        <div class="flex flex-col gap-1.5">
+                    <form class="mt-2 flex flex-col" @submit.prevent="handleSubmit">
+                        <div class="flex flex-col gap-1. mb-5">
                             <label for="username"
                                 class="font-mono text-[11px] uppercase tracking-widest text-neutral-400 dark:text-neutral-600">
                                 Username
@@ -70,7 +76,7 @@ async function handleSubmit() {
                                 class="border-0 border-b border-neutral-200 bg-transparent py-2 text-sm text-neutral-900 outline-none transition-colors placeholder:text-neutral-400 focus:border-neutral-900 dark:border-neutral-800 dark:text-white dark:placeholder:text-neutral-600 dark:focus:border-white">
                         </div>
 
-                        <div class="flex flex-col gap-1.5">
+                        <div class="flex flex-col gap-1.5 mb-5">
                             <div class="flex items-baseline justify-between">
                                 <label for="password"
                                     class="font-mono text-[11px] uppercase tracking-widest text-neutral-400 dark:text-neutral-600">
@@ -87,7 +93,7 @@ async function handleSubmit() {
                         </p>
 
                         <button type="submit" :disabled="isSubmitting"
-                            class="mt-2 inline-flex items-center cursor-pointer justify-center gap-1 border border-neutral-900 bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-neutral-700 disabled:cursor-not-allowed disabled:opacity-60 dark:border-white dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200">
+                            class="btn-fill mt-2 py-2.5 gap-1">
                             {{ isSubmitting ? 'Loggin...' : 'Log In' }}
                         </button>
                     </form>

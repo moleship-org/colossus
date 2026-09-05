@@ -161,6 +161,76 @@ a:hover {
   animation-duration: 9s;
 }
 
+@layer components {
+  .btn {
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 border px-4 py-2 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-outline,
+  a.btn-outline {
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 border px-4 py-2 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-60 border-neutral-200 hover:border-neutral-900 dark:border-neutral-800 dark:hover:border-white;
+    color: oklch(37.1% 0 0) !important;
+  }
+
+  .btn-outline:hover,
+  a.btn-outline:hover {
+    color: oklch(20.5% 0 0) !important;
+  }
+
+  .dark .btn-outline,
+  .dark a.btn-outline {
+    color: oklch(87.2% 0.01 258.338) !important;
+  }
+
+  .dark .btn-outline:hover,
+  .dark a.btn-outline:hover {
+    color: #fff !important;
+  }
+
+  .btn-fill,
+  a.btn-fill {
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 border px-4 py-2 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 border-neutral-900 bg-neutral-900 hover:bg-neutral-700 dark:border-white dark:bg-white dark:hover:bg-neutral-200;
+    color: #fff !important;
+  }
+
+  .dark .btn-fill,
+  .dark a.btn-fill {
+    color: oklch(20.5% 0 0)  !important;
+  }
+
+  .btn-danger,
+  a.btn-danger {
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 border px-4 py-2 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-60 border-red-200 hover:bg-red-50 dark:border-red-900/60 dark:hover:bg-red-950/40;
+    color: oklch(50.5% 0.213 27.518)  !important;
+  }
+
+  .dark .btn-danger,
+  .dark a.btn-danger {
+    color: oklch(80.8% 0.114 19.571)  !important;
+  }
+
+  .btn-ghost,
+  a.btn-ghost {
+    @apply inline-flex cursor-pointer items-center gap-2 text-sm transition-colors;
+    color: oklch(55.1% 0.027 264.364)  !important;
+  }
+
+  .btn-ghost:hover,
+  a.btn-ghost:hover {
+    color: oklch(20.5% 0 0)  !important;
+  }
+
+  .dark .btn-ghost,
+  .dark a.btn-ghost {
+    color: oklch(70.8% 0 0)  !important;
+  }
+
+  .dark .btn-ghost:hover,
+  .dark a.btn-ghost:hover {
+    color: #fff  !important;
+  }
+}
+
 @keyframes float-y {
 
   0%,

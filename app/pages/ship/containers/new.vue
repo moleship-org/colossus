@@ -139,7 +139,7 @@ async function handleSubmit() {
         </h2>
       </div>
 
-      <button type="button" class="inline-flex cursor-pointer items-center gap-2 text-sm text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white" @click="router.back()">
+      <button type="button" class="btn-ghost" @click="router.back()">
         <ArrowLeft class="size-4" />
         Back
       </button>
@@ -262,12 +262,12 @@ async function handleSubmit() {
       </p>
 
       <div class="flex flex-wrap gap-3">
-        <button type="submit" :disabled="isSubmitting" class="inline-flex min-w-36 cursor-pointer items-center justify-center gap-2 border border-neutral-900 bg-neutral-900 px-5 py-2 text-sm font-medium text-white! transition-colors hover:bg-neutral-700 disabled:cursor-not-allowed disabled:opacity-60 dark:border-white dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200">
+        <button type="submit" :disabled="isSubmitting" class="btn-fill min-w-36 px-5">
           <Save class="size-4 inline" />
           {{ isSubmitting ? 'Creating...' : 'Create container' }}
         </button>
 
-        <NuxtLink to="/ship/containers" class="inline-flex min-w-30 items-center justify-center gap-2 border border-neutral-200 px-5 py-2 text-sm font-medium text-neutral-700! transition-colors hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-800 dark:text-neutral-300 dark:hover:border-white dark:hover:text-white">
+        <NuxtLink to="/ship/containers" class="btn-outline min-w-30 px-5 font-medium">
           <Plus class="size-4 rotate-45 inline" />
           Cancel
         </NuxtLink>

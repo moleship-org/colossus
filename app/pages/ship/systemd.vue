@@ -99,7 +99,7 @@ async function runOperation(operation: string) {
             <div class="flex flex-wrap gap-2">
                 <button v-for="operation in ['status', 'stop', 'start', 'restart']" :key="operation"
                     type="button" :disabled="Boolean(activeOperation)" @click="runOperation(operation)"
-                    class="inline-flex cursor-pointer items-center justify-center border border-neutral-900 px-4 py-2 text-sm font-medium text-neutral-900 transition-colors hover:bg-neutral-900 hover:text-white disabled:cursor-not-allowed disabled:opacity-60 dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-neutral-900">
+                    class="btn-outline">
                     {{ activeOperation === operation ? 'Loading...' : operation }}
                 </button>
             </div>
@@ -115,7 +115,7 @@ async function runOperation(operation: string) {
                     Daemon
                 </h2>
                 <button type="button" :disabled="Boolean(activeOperation)" @click="runOperation('daemon-reload')"
-                    class="inline-flex cursor-pointer items-center justify-center border border-neutral-900 bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-neutral-700 disabled:cursor-not-allowed disabled:opacity-60 dark:border-white dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200">
+                    class="btn-fill">
                     {{ activeOperation === 'daemon-reload' ? 'Loading...' : 'Daemon reload' }}
                 </button>
             </div>
