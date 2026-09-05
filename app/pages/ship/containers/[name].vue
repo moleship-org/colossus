@@ -30,6 +30,11 @@ useHead(() => ({
 
 const statusTone = computed(() => {
   const normalized = status.value?.status?.toLowerCase() ?? ''
+
+  if (normalized?.includes('inactive')) {
+    return 'border-neutral-200 bg-neutral-50 text-neutral-600 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300'
+  }
+
   if (normalized?.includes('active') || normalized?.includes('running')) {
     return 'border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-900/60 dark:bg-emerald-950/40 dark:text-emerald-300'
   }
@@ -94,8 +99,7 @@ await loadContainer()
 
 <template>
   <div
-    class="flex flex-col gap-6 border border-neutral-200 bg-white/95 p-6 shadow-2xl shadow-neutral-200/40 backdrop-blur-xl dark:border-neutral-800 dark:bg-neutral-950/95 dark:shadow-black/20"
-  >
+    <div class="flex flex-col gap-4 border border-neutral-200 bg-white/95 p-4 shadow-2xl shadow-neutral-200/40 backdrop-blur-xl dark:border-neutral-800 dark:bg-neutral-950/95 dark:shadow-black/20 md:gap-6 md:p-6">
     <div class="flex flex-wrap items-start justify-between gap-4">
       <div>
         <h2 class="mt-2 text-2xl font-medium text-neutral-900 dark:text-white">
@@ -106,8 +110,7 @@ await loadContainer()
       <button
         type="button"
         class="inline-flex cursor-pointer items-center gap-2 text-sm text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
-        @click="router.back()"
-      >
+        @click="router.back()">
         <ArrowLeft class="size-4" />
         Back
       </button>
@@ -121,13 +124,13 @@ await loadContainer()
     </div>
 
     <template v-else>
-      <div class="flex flex-wrap items-center justify-between gap-4">
+      <div class="flex flex-col gap-3 md:flex-row md:flex-wrap md:items-center md:justify-between md:gap-4">
         <div class="inline-flex items-center gap-3 border px-4 py-2 text-sm" :class="statusTone">
           <span class="size-2 bg-current" />
           <span>{{ isLoading ? 'Loading status…' : status?.status || 'Unknown status' }}</span>
         </div>
 
-        <div class="flex flex-wrap gap-2">
+        <div class="grid grid-cols-2 gap-2 md:flex md:flex-wrap">
           <button
             type="button"
             :disabled="Boolean(activeOperation) || isLoading"
@@ -167,7 +170,7 @@ await loadContainer()
         </div>
       </div>
 
-      <div class="grid gap-4 lg:grid-cols-1">
+      <div class="grid gap-3 md:gap-4 lg:grid-cols-1">
         <section
           class="border border-neutral-200 bg-neutral-50/80 p-5 dark:border-neutral-800 dark:bg-neutral-900/60"
         >

@@ -9,10 +9,7 @@ useHead(() => ({
 </script>
 
 <template>
-    <div class="flex flex-col gap-2">
-        <p class="font-mono text-[11px] uppercase tracking-widest text-neutral-400 dark:text-neutral-600">
-            /ship/{{ section }}
-        </p>
+    <div class="flex flex-col gap-2 p-4 md:p-6">
         <h2 class="text-2xl font-medium text-neutral-900 dark:text-white">
             {{ title }}
         </h2>

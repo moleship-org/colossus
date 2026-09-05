@@ -41,6 +41,10 @@ function statusLabel(item: QuadletUnitInfo) {
 function statusClass(item: QuadletUnitInfo) {
   const label = statusLabel(item).toLowerCase()
 
+  if (label.includes('inactive')) {
+    return 'border-neutral-200 bg-neutral-50 text-neutral-600 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300'
+  }
+
   if (label.includes('active') || label.includes('running')) {
     return 'border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-900/60 dark:bg-emerald-950/40 dark:text-emerald-300'
   }
@@ -81,8 +85,8 @@ watch(
 </script>
 
 <template>
-  <div class="relative flex flex-col gap-6 p-4 md:p-6">
-    <div class="flex flex-wrap items-start justify-between gap-4">
+  <div class="relative flex flex-col gap-4 p-3 md:gap-6 md:p-6">
+    <div class="flex flex-col gap-3 md:flex-row md:flex-wrap md:items-start md:justify-between md:gap-4">
       <div>
         <h1 class="mt-2 text-2xl font-medium text-neutral-900 dark:text-white">
           Containers
@@ -92,7 +96,7 @@ watch(
         </p>
       </div>
 
-      <div class="flex flex-wrap gap-2">
+      <div class="grid grid-cols-2 gap-2 md:flex md:flex-wrap">
         <button
           type="button"
           :disabled="isLoading || isRefreshing"
@@ -117,7 +121,7 @@ watch(
       {{ errorMessage }}
     </div>
 
-    <section class="border border-neutral-200 bg-white/80 p-4 backdrop-blur-sm dark:border-neutral-800 dark:bg-neutral-950/60">
+    <section class="border border-neutral-200 bg-white/80 p-3 backdrop-blur-sm dark:border-neutral-800 dark:bg-neutral-950/60 md:p-4">
       <div class="flex items-center justify-between gap-3 border-b border-neutral-200 px-2 pb-4 dark:border-neutral-800">
         <div>
           <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
@@ -126,11 +130,11 @@ watch(
         </div>
       </div>
 
-      <div v-if="isLoading" class="flex min-h-64 items-center justify-center text-sm text-neutral-500 dark:text-neutral-400">
+      <div v-if="isLoading" class="flex min-h-40 items-center justify-center text-sm text-neutral-500 dark:text-neutral-400 md:min-h-64">
         Loading containers…
       </div>
 
-      <div v-else-if="!sortedContainers.length" class="mt-4 flex min-h-64 flex-col items-center justify-center gap-3 border border-dashed border-neutral-200 bg-neutral-50/60 p-8 text-center dark:border-neutral-800 dark:bg-neutral-900/40">
+      <div v-else-if="!sortedContainers.length" class="mt-3 flex min-h-40 flex-col items-center justify-center gap-3 border border-dashed border-neutral-200 bg-neutral-50/60 p-6 text-center dark:border-neutral-800 dark:bg-neutral-900/40 md:mt-4 md:min-h-64 md:p-8">
         <LucideContainer class="size-10 text-neutral-300 dark:text-neutral-700" />
         <div>
           <p class="text-sm font-medium text-neutral-900 dark:text-white">
@@ -142,12 +146,12 @@ watch(
         </div>
       </div>
 
-      <div v-else class="mt-4 flex flex-col gap-3">
+      <div v-else class="mt-3 flex flex-col gap-2 md:mt-4 md:gap-3">
         <NuxtLink
           v-for="item in sortedContainers"
           :key="item.name"
           :to="`/ship/containers/${encodeURIComponent(item.name)}`"
-          class="group border p-4 transition-all hover:border-neutral-300 hover:bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900/40 dark:hover:border-neutral-700 dark:hover:bg-neutral-900"
+          class="group border p-3 transition-all hover:border-neutral-300 hover:bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900/40 dark:hover:border-neutral-700 dark:hover:bg-neutral-900 md:p-4"
           :class="selectedContainerName === item.name ? 'border-neutral-900 bg-neutral-50 dark:border-white dark:bg-neutral-900' : 'border-neutral-200 bg-white'"
         >
           <div class="flex flex-wrap items-start justify-between gap-3">
@@ -169,7 +173,7 @@ watch(
       </div>
     </section>
 
-    <div v-if="hasOverlayView" class="absolute inset-0 z-20 bg-neutral-100/70 p-4 backdrop-blur-sm dark:bg-neutral-950/70 md:p-6">
+    <div v-if="hasOverlayView" class="absolute inset-0 z-20 bg-neutral-100/70 p-2 backdrop-blur-sm dark:bg-neutral-950/70 md:p-6">
       <NuxtPage />
     </div>
   </div>
