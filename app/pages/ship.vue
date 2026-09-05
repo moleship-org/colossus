@@ -20,9 +20,9 @@ const sections = [
     { label: 'Libpod', path: '/ship/libpod', icon: LucideBox },
     { label: 'Systemd', path: '/ship/systemd', icon: LucideSettings2 },
     { label: 'Containers', path: '/ship/containers', icon: LucideContainer },
-    { label: 'Volumes', path: '/ship/volumes', icon: LucideDatabase },
-    { label: 'Networks', path: '/ship/networks', icon: LucideNetwork },
-    { label: 'Images', path: '/ship/images', icon: LucideImage },
+    //{ label: 'Volumes', path: '/ship/volumes', icon: LucideDatabase },
+    //{ label: 'Networks', path: '/ship/networks', icon: LucideNetwork },
+    //{ label: 'Images', path: '/ship/images', icon: LucideImage },
 ]
 
 const isActive = (path: string) => route.path === path
@@ -36,7 +36,7 @@ async function handleLogout() {
 
 <template>
     <div v-if="session.isLoggedIn" class="flex min-h-[80vh] items-center justify-center px-4 py-16">
-        <Grid :cols="2" :cols-lg="4" border="1" class="w-full max-w-7xl shadow-xl">
+        <Grid :cols="1" :cols-lg="4" border="1" class="w-full max-w-7xl min-h-[85vh] shadow-xl">
             <GCell :col-span="1" padding="p-5 md:p-6">
                 <template #title>
                     <div class="flex items-center justify-between gap-4">
@@ -67,7 +67,7 @@ async function handleLogout() {
                 </template>
             </GCell>
 
-            <GCell :col-span-lg="3" padding="p-6 md:p-8">
+            <GCell :col-span-lg="3" padding="p-6 md:p-8" class="min-h-0 overflow-y-auto">
                 <NuxtPage />
             </GCell>
         </Grid>

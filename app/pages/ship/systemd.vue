@@ -8,7 +8,16 @@ useHead({
     title: 'Systemd',
 })
 
-const unit = ref('')
+const persistedState = usePersistentState('ship:systemd', () => ({
+    unit: '',
+}))
+
+const unit = computed({
+    get: () => persistedState.value.unit,
+    set: value => {
+        persistedState.value.unit = value
+    },
+})
 const result = ref<unknown>()
 const errorMessage = ref('')
 const activeOperation = ref('')
@@ -82,8 +91,8 @@ async function runOperation(operation: string) {
 
             <div
                 class="flex min-w-0 items-center border-b border-neutral-200 text-sm text-neutral-900 focus-within:border-neutral-900 dark:border-neutral-800 dark:text-white dark:focus-within:border-white">
-                <span class="shrink-0 py-2 text-neutral-400 dark:text-neutral-600">systemd/units/</span>
-                <input id="systemd-unit" v-model="unit" type="text" autocomplete="off" placeholder="nginx"
+                <label for="systemd-unit" class="shrink-0 py-2 text-neutral-400 dark:text-neutral-600">systemd/units/</label>
+                <input id="systemd-unit" v-model="unit" type="text" autocomplete="off" placeholder="...nginx"
                     class="min-w-0 flex-1 border-0 bg-transparent py-2 pl-0.5 outline-none placeholder:text-neutral-400 dark:placeholder:text-neutral-600">
             </div>
 
@@ -117,7 +126,7 @@ async function runOperation(operation: string) {
                 Response body
             </h2>
             <pre
-                class="min-h-40 overflow-x-auto border border-neutral-200 bg-neutral-50 p-4 text-xs leading-relaxed whitespace-pre-wrap wrap-break-word text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300">{{ formattedResult }}</pre>
+                class="min-h-80 max-h-80 overflow-x-auto border border-neutral-200 bg-neutral-50 p-4 text-xs leading-relaxed whitespace-pre-wrap wrap-break-word text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300">{{ formattedResult }}</pre>
         </section>
     </div>
 </template>
