@@ -37,6 +37,27 @@ export interface QuadletContainerUnit {
   wanted_by?: string[]
 }
 
+export interface QuadletVolumeUnit {
+  name: string
+  description?: string
+  after?: string[]
+  requires?: string[]
+  containers_conf_modules?: string[]
+  copy?: boolean
+  device?: string
+  driver?: string
+  group?: string
+  image?: string
+  type?: string
+  user?: string
+  global_args?: string[]
+  options?: string[]
+  podman_args?: string[]
+  labels?: Record<string, string>
+  volume_name?: string
+  wanted_by?: string[]
+}
+
 export interface UseQuadletOptions<TUnit> {
   kind: QuadletKind
   encodeName?: (name: string) => string
@@ -141,5 +162,11 @@ export function useQuadlet<TUnit extends { name: string }>(options: UseQuadletOp
 export function useQuadletContainers() {
   return useQuadlet<QuadletContainerUnit>({
     kind: 'containers',
+  })
+}
+
+export function useQuadletVolumes() {
+  return useQuadlet<QuadletVolumeUnit>({
+    kind: 'volumes',
   })
 }
