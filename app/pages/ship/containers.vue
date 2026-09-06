@@ -30,31 +30,8 @@ const sortedContainers = computed(() => {
   return [...containers.value].sort((a, b) => a.name.localeCompare(b.name))
 })
 
-function statusLabel(item: QuadletUnitInfo) {
-  if (item.statusError) {
-    return 'Status unavailable'
-  }
-
-  return item.status || 'Unknown'
-}
-
-function statusClass(item: QuadletUnitInfo) {
-  const label = statusLabel(item).toLowerCase()
-
-  if (label.includes('inactive')) {
-    return 'border-neutral-200 bg-neutral-50 text-neutral-600 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300'
-  }
-
-  if (label.includes('active') || label.includes('running')) {
-    return 'border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-900/60 dark:bg-emerald-950/40 dark:text-emerald-300'
-  }
-
-  if (label.includes('failed') || label.includes('dead')) {
-    return 'border-red-200 bg-red-50 text-red-700 dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-300'
-  }
-
-  return 'border-neutral-200 bg-neutral-50 text-neutral-600 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300'
-}
+const statusLabel = getQuadletStatusLabel
+const statusClass = (item: QuadletUnitInfo) => getQuadletStatusToneClass(statusLabel(item))
 
 async function loadContainers(mode: 'initial' | 'refresh' = 'initial') {
   if (mode === 'initial') {

@@ -28,21 +28,7 @@ useHead(() => ({
   title: name.value ? `${name.value} container` : 'Container'
 }))
 
-const statusTone = computed(() => {
-  const normalized = status.value?.status?.toLowerCase() ?? ''
-
-  if (normalized?.includes('inactive')) {
-    return 'border-neutral-200 bg-neutral-50 text-neutral-600 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300'
-  }
-
-  if (normalized?.includes('active') || normalized?.includes('running')) {
-    return 'border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-900/60 dark:bg-emerald-950/40 dark:text-emerald-300'
-  }
-  if (normalized.includes('failed') || normalized.includes('dead')) {
-    return 'border-red-200 bg-red-50 text-red-700 dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-300'
-  }
-  return 'border-neutral-200 bg-neutral-50 text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300'
-})
+const statusTone = computed(() => getQuadletStatusToneClass(status.value?.status))
 
 async function loadContainer() {
   if (!name.value) {

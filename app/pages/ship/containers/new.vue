@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { ArrowLeft, Plus, Save } from '@lucide/vue'
 import type { QuadletContainerUnit } from '~/composables/useQuadlet'
+import {
+  buildQuadletContainerPayload,
+  createEmptyQuadletContainerRaw,
+  createEmptyQuadletContainerUnit,
+} from '~/composables/quadlet-container-form'
 
 definePageMeta({
   layout: 'default',
@@ -14,106 +19,20 @@ useHead({
 const containers = useQuadletContainers()
 const router = useRouter()
 
-const form = reactive<QuadletContainerUnit>({
-  name: '',
-  description: '',
-  image: '',
-  exec: [],
-  entrypoint: '',
-  working_dir: '',
-  user: '',
-  environment: {},
-  environment_file: [],
-  volumes: [],
-  publish_ports: [],
-  networks: [],
-  labels: {},
-  auto_update: '',
-  podman_args: [],
-  restart: 'always',
-  wanted_by: ['default.target'],
-  after: [],
-  requires: [],
-})
-
-const raw = reactive({
-  exec: '',
-  after: '',
-  requires: '',
-  environment: '',
-  environment_file: '',
-  volumes: '',
-  publish_ports: '',
-  networks: '',
-  labels: '',
-  podman_args: '',
-  wanted_by: 'default.target',
-})
+const form = reactive<QuadletContainerUnit>(createEmptyQuadletContainerUnit())
+const raw = reactive(createEmptyQuadletContainerRaw())
 
 const startAfterCreate = ref(true)
 const failIfExists = ref(true)
 const isSubmitting = ref(false)
 const errorMessage = ref('')
 
-function linesToArray(value: string) {
-  return value
-    .split('\n')
-    .map(item => item.trim())
-    .filter(Boolean)
-}
-
-function linesToRecord(value: string) {
-  const result: Record<string, string> = {}
-
-  for (const line of linesToArray(value)) {
-    const separatorIndex = line.indexOf('=')
-    if (separatorIndex === -1) {
-      throw new Error(`Invalid key=value entry: ${line}`)
-    }
-
-    const key = line.slice(0, separatorIndex).trim()
-    const recordValue = line.slice(separatorIndex + 1).trim()
-
-    if (!key) {
-      throw new Error(`Invalid key=value entry: ${line}`)
-    }
-
-    result[key] = recordValue
-  }
-
-  return result
-}
-
-function buildPayload(): QuadletContainerUnit {
-  return {
-    name: form.name.trim(),
-    description: form.description?.trim() || undefined,
-    image: form.image.trim(),
-    entrypoint: form.entrypoint?.trim() || undefined,
-    working_dir: form.working_dir?.trim() || undefined,
-    user: form.user?.trim() || undefined,
-    auto_update: form.auto_update?.trim() || undefined,
-    restart: form.restart?.trim() || undefined,
-    exec: linesToArray(raw.exec),
-    after: linesToArray(raw.after),
-    requires: linesToArray(raw.requires),
-    environment: linesToRecord(raw.environment),
-    environment_file: linesToArray(raw.environment_file),
-    volumes: linesToArray(raw.volumes),
-    publish_ports: linesToArray(raw.publish_ports),
-    networks: linesToArray(raw.networks),
-    labels: linesToRecord(raw.labels),
-    podman_args: linesToArray(raw.podman_args),
-    wanted_by: linesToArray(raw.wanted_by),
-  }
-}
-
 async function handleSubmit() {
   errorMessage.value = ''
   isSubmitting.value = true
 
   try {
-    const payload = buildPayload()
+    const payload = buildQuadletContainerPayload(form, raw)
     await containers.create(payload, {
       start: startAfterCreate.value,
       failIfExists: failIfExists.value,

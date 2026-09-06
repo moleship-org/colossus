@@ -18,9 +18,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
     cols: 1,
     lineColor: 'bg-neutral-200 dark:bg-neutral-800 border-neutral-200 dark:border-neutral-800',
-    bg: 'bg-white dark:bg-neutral-950',
     border: '0',
-    pattern: false,
 })
 
 const style = computed(() => ({

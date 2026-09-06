@@ -16,7 +16,7 @@ export const useSessionStore = defineStore('session', () => {
       const res = await callApi<SessionResponse>('/auth/session', { method: 'GET' })
       username.value = res.username
       status.value = 'authenticated'
-    } catch (err) {
+    } catch {
       username.value = ''
       status.value = 'unauthenticated'
     }

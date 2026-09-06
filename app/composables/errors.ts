@@ -128,7 +128,7 @@ export function getErrorMessage(err: unknown, options: GetErrorMessageOptions = 
 }
 
 export function getErrorByStatusCode(code: number): ErrorRecord {
-    return DEFAULT_ERROR_MESSAGES[code] ?? DEFAULT_ERROR_MESSAGES[500] as ErrorRecord
+  return (DEFAULT_ERROR_MESSAGES[code] ?? DEFAULT_ERROR_MESSAGES[500]) as ErrorRecord
 }
 
 /**
