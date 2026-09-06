@@ -58,6 +58,56 @@ export interface QuadletVolumeUnit {
   wanted_by?: string[]
 }
 
+export interface QuadletNetworkUnit {
+  name: string
+  description?: string
+  after?: string[]
+  requires?: string[]
+  containers_conf_modules?: string[]
+  disable_dns?: boolean
+  dns?: string[]
+  driver?: string
+  gateway?: string[]
+  global_args?: string[]
+  interface_name?: string
+  internal?: boolean
+  ipam_driver?: string
+  ip_range?: string[]
+  ipv6?: boolean
+  labels?: Record<string, string>
+  network_delete_on_stop?: boolean
+  network_name?: string
+  options?: string[]
+  podman_args?: string[]
+  subnet?: string[]
+  wanted_by?: string[]
+}
+
+export interface QuadletImageUnit {
+  name: string
+  description?: string
+  after?: string[]
+  requires?: string[]
+  all_tags?: boolean
+  arch?: string
+  auth_file?: string
+  cert_dir?: string
+  containers_conf_modules?: string[]
+  creds?: string
+  decryption_key?: string
+  global_args?: string[]
+  image: string
+  image_tag?: string
+  os?: string
+  podman_args?: string[]
+  policy?: string
+  retry?: number
+  retry_delay?: string
+  tls_verify?: boolean
+  variant?: string
+  wanted_by?: string[]
+}
+
 export interface UseQuadletOptions<TUnit> {
   kind: QuadletKind
   encodeName?: (name: string) => string
@@ -168,5 +218,17 @@ export function useQuadletContainers() {
 export function useQuadletVolumes() {
   return useQuadlet<QuadletVolumeUnit>({
     kind: 'volumes',
+  })
+}
+
+export function useQuadletNetworks() {
+  return useQuadlet<QuadletNetworkUnit>({
+    kind: 'networks',
+  })
+}
+
+export function useQuadletImages() {
+  return useQuadlet<QuadletImageUnit>({
+    kind: 'images',
   })
 }

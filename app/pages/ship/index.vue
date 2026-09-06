@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { LucideHome } from '@lucide/vue';
+
 definePageMeta({
     layout: 'default',
     middleware: ['auth'],
@@ -14,7 +16,9 @@ const session = useSessionStore()
 
 <template>
     <div class="p-6 md:p-8 overflow-auto">
-        <h1 class="text-2xl">Home</h1>
+        <h1 class="text-2xl">
+            Home
+        </h1>
 
         <div class="text-base font-light mt-4 mb-4 overflow-auto">
             <p>

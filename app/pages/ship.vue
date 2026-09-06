@@ -21,8 +21,8 @@ const sections = [
     { label: 'Systemd', path: '/ship/systemd', icon: LucideSettings2 },
     { label: 'Containers', path: '/ship/containers', icon: LucideContainer },
     { label: 'Volumes', path: '/ship/volumes', icon: LucideDatabase },
-    //{ label: 'Networks', path: '/ship/networks', icon: LucideNetwork },
-    //{ label: 'Images', path: '/ship/images', icon: LucideImage },
+    { label: 'Networks', path: '/ship/networks', icon: LucideNetwork },
+    { label: 'Images', path: '/ship/images', icon: LucideImage },
 ]
 
 const isActive = (path: string) => route.path === path
