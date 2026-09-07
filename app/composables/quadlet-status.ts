@@ -1,4 +1,4 @@
-import type { QuadletUnitInfo } from '~/composables/useQuadlet'
+import type { QuadletUnitInfo } from '~/composables/use-quadlet'
 
 /**
  * Human-readable label for a quadlet unit's status, accounting for the

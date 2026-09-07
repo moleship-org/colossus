@@ -1,4 +1,4 @@
-import type { QuadletContainerUnit } from '~/composables/useQuadlet'
+import type { QuadletContainerUnit } from '~/composables/use-quadlet'
 
 export interface QuadletContainerFormRaw {
   exec: string

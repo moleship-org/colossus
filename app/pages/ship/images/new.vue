@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ArrowLeft, Plus, Save } from '@lucide/vue'
-import type { QuadletImageUnit } from '~/composables/useQuadlet'
+import type { QuadletImageUnit } from '~/composables/use-quadlet'
 import {
   buildQuadletImagePayload,
   createEmptyQuadletImageRaw,

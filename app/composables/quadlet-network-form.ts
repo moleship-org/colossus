@@ -1,4 +1,4 @@
-import type { QuadletNetworkUnit } from '~/composables/useQuadlet'
+import type { QuadletNetworkUnit } from '~/composables/use-quadlet'
 import { linesToArray, linesToRecord } from '~/composables/quadlet-container-form'
 
 export interface QuadletNetworkFormRaw {

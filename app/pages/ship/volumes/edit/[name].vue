@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ArrowLeft, Save } from '@lucide/vue'
-import type { QuadletVolumeUnit } from '~/composables/useQuadlet'
+import type { QuadletVolumeUnit } from '~/composables/use-quadlet'
 import {
   buildQuadletVolumePayload,
   createEmptyQuadletVolumeRaw,

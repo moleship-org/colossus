@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ArrowLeft, Save } from '@lucide/vue'
-import type { QuadletNetworkUnit } from '~/composables/useQuadlet'
+import type { QuadletNetworkUnit } from '~/composables/use-quadlet'
 import {
   buildQuadletNetworkPayload,
   createEmptyQuadletNetworkRaw,

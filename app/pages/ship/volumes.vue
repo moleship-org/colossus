@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { LucideDatabase, Plus, RefreshCw } from '@lucide/vue'
-import type { QuadletUnitInfo } from '~/composables/useQuadlet'
+import type { QuadletUnitInfo } from '~/composables/use-quadlet'
 
 definePageMeta({
   layout: 'default',

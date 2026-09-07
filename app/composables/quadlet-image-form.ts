@@ -1,4 +1,4 @@
-import type { QuadletImageUnit } from '~/composables/useQuadlet'
+import type { QuadletImageUnit } from '~/composables/use-quadlet'
 import { linesToArray } from '~/composables/quadlet-container-form'
 
 export interface QuadletImageFormRaw {

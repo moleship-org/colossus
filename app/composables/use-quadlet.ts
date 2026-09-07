@@ -148,10 +148,8 @@ export function useQuadlet<TUnit extends { name: string }>(options: UseQuadletOp
   async function create(unit: TUnit, createOptions: QuadletActionOptions = {}) {
     return await callApi<QuadletCreateResponse>(basePath, {
       method: 'POST',
-      body: {
-        ...unit,
-        ...createOptions,
-      },
+      query: createOptions,
+      body: unit,
     })
   }
 
