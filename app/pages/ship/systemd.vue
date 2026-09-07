@@ -97,7 +97,7 @@ async function runOperation(operation: string) {
             </div>
 
             <div class="flex flex-wrap gap-2">
-                <button v-for="operation in ['status', 'stop', 'start', 'restart']" :key="operation"
+                <button v-for="operation in ['status', 'stop', 'start', 'restart', 'enable', 'disable']" :key="operation"
                     type="button" :disabled="Boolean(activeOperation)" @click="runOperation(operation)"
                     class="btn-outline">
                     {{ activeOperation === operation ? 'Loading...' : operation }}
