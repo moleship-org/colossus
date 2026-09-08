@@ -20,7 +20,7 @@
 set -euo pipefail
 
 usage() {
-  echo "Usage: $0 [install|update|uninstall|publish] [--rootful|--rootless]" >&2
+  echo "Usage: $0 [install|update|uninstall|publish|build] [--rootful|--rootless]" >&2
   exit 1
 }
 
@@ -29,7 +29,7 @@ FORWARD_ARGS=()
 
 for arg in "$@"; do
   case "$arg" in
-    install | update | uninstall | publish) ACTION="$arg" ;;
+    install | update | uninstall | publish | build) ACTION="$arg" ;;
     --rootful | --rootless) FORWARD_ARGS+=("$arg") ;;
     *) usage ;;
   esac
