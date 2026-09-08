@@ -12,7 +12,7 @@ RUN corepack enable
 
 # --- install dependencies (cached separately from the app source) --------
 FROM base AS deps
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY package*.json pnpm*.yaml .
 RUN pnpm install --frozen-lockfile
 
 # --- build the Nuxt app -----------------------------------------------------

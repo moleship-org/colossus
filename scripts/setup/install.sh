@@ -10,8 +10,12 @@
 #   sudo ./install.sh --rootful  # rootful
 #
 # Environment overrides:
-#   NUXT_API_BASE   Moleship API base URL (default: http://host.containers.internal:5000/api/v1)
-#   COLOSSUS_PORT   Host port to publish Colossus on (default: 8080)
+#   NUXT_API_BASE   Moleship API base URL (default: http://localhost:5000/api/v1)
+#   COLOSSUS_PORT   Port Colossus listens on (default: 3000)
+#
+# Colossus runs with Network=host (see containers/systemd/colossus-*.container
+# for why), so there is no host/container port mapping - COLOSSUS_PORT is
+# the actual port it binds to, host-wide.
 
 set -euo pipefail
 
@@ -44,8 +48,8 @@ main() {
     }
   fi
 
-  api_base="${NUXT_API_BASE:-http://host.containers.internal:5000/api/v1}"
-  port="${COLOSSUS_PORT:-8080}"
+  api_base="${NUXT_API_BASE:-http://localhost:5000/api/v1}"
+  port="${COLOSSUS_PORT:-3000}"
 
   log_info "Creating configuration directory ${COLOSSUS_CONFIG_DIR}"
   install -d -m 755 "$COLOSSUS_CONFIG_DIR"
@@ -56,6 +60,7 @@ main() {
 # Colossus runtime configuration.
 # Changes here take effect after: ${SYSTEMCTL[*]} restart ${COLOSSUS_SERVICE}
 NUXT_API_BASE=${api_base}
+NITRO_PORT=${port}
 EOF
     chmod 640 "$COLOSSUS_ENV_FILE"
   else
@@ -75,9 +80,9 @@ EOF
     rm -f "$tmp_unit"
   fi
 
-  if [ "$port" != "8080" ]; then
-    log_info "Publishing Colossus on port ${port}"
-    sed -i "s/^PublishPort=.*/PublishPort=${port}:3000/" "$COLOSSUS_UNIT_FILE"
+  if [ "$port" != "3000" ]; then
+    log_info "Configuring Colossus to listen on port ${port}"
+    sed -i "s#127.0.0.1:3000#127.0.0.1:${port}#" "$COLOSSUS_UNIT_FILE"
   fi
 
   log_info "Reloading systemd units"

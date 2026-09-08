@@ -5,21 +5,10 @@
 # instance and rootless Podman - no sudo is needed to install, start, or
 # manage it.
 #
-# Install (as the target user):
-#   mkdir -p ~/.config/containers/systemd ~/.config/colossus
-#   install -Dm644 colossus-rootless.container ~/.config/containers/systemd/colossus.container
-#   systemctl --user daemon-reload
-#   systemctl --user start colossus.service
-#
 # For Colossus to keep running after you log out, and to start automatically
 # on boot, enable lingering for the user. This is the only step in this
 # whole setup that needs root, since it's a system-wide login setting:
 #   sudo loginctl enable-linger "$USER"
-#
-# Quadlet applies the [Install] section below itself at daemon-reload time,
-# so the service starts on boot (once lingering is enabled) automatically -
-# there is no separate "systemctl --user enable" step (and none is valid:
-# generated/transient units cannot be enabled).
 #
 # See scripts/quick-setup.sh and scripts/setup/*.sh for an automated install.
 
@@ -27,35 +16,18 @@
 Description=Colossus - Web UI for Moleship (rootless)
 Documentation=https://github.com/moleship-org/colossus
 
-# No explicit network-online.target dependency here: Quadlet automatically
-# adds one appropriate for user units (podman-user-wait-network-online.service)
-# since system targets like network-online.target can't be waited on from a
-# user session.
-
 [Container]
 ContainerName=colossus
 Image=ghcr.io/moleship-org/colossus:latest
 AutoUpdate=registry
 
-# Moleship is expected to run directly on the host. `host.containers.internal`
-# lets the container reach it without sharing the host network namespace.
-# Override via ~/.config/colossus/colossus.env, which install.sh always
-# creates (Quadlet's EnvironmentFile does not support systemd's "optional
-# file" "-" prefix, so this file must exist). %h expands to the running
-# user's home directory.
-Environment=NUXT_API_BASE=http://host.containers.internal:5000/api/v1
+# This only works if Moleship is *also* reachable via localhost - either
+# running directly on the host, or itself using Network=host.
+Network=host
+
+# Override NUXT_API_BASE as needed
+Environment=NUXT_API_BASE=http://localhost:5000/api/v1
 EnvironmentFile=%h/.config/colossus/colossus.env
-AddHost=host.containers.internal:host-gateway
-
-# Rootless containers cannot publish ports below 1024 without extra host
-# configuration, so 8080 is used here instead of the usual 80.
-PublishPort=8080:3000
-
-HealthCmd=wget -q -O- http://127.0.0.1:3000/ >/dev/null || exit 1
-HealthInterval=30s
-HealthRetries=3
-HealthStartPeriod=10s
-HealthTimeout=5s
 
 NoNewPrivileges=true
 
