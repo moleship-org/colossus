@@ -1,0 +1,22 @@
+# Keep the Containerfile build context small.
+.git
+.github
+.nuxt
+.output
+.nitro
+.cache
+.data
+node_modules
+dist
+logs
+*.log
+.env
+.env.*
+!.env.example
+.DS_Store
+.fleet
+.idea
+containers
+scripts
+README.md
+LICENSE

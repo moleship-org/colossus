@@ -1,0 +1,52 @@
+# Colossus - minimal footprint container image.
+#
+# Build from the repository root so the Nuxt app source is in the build
+# context:
+#   podman build -f containers/Containerfile -t ghcr.io/moleship-org/colossus:latest .
+
+ARG NODE_VERSION=24-alpine
+
+FROM node:${NODE_VERSION} AS base
+WORKDIR /app
+RUN corepack enable
+
+# --- install dependencies (cached separately from the app source) --------
+FROM base AS deps
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN pnpm install --frozen-lockfile
+
+# --- build the Nuxt app -----------------------------------------------------
+FROM base AS build
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN pnpm build
+
+# --- minimal runtime image ---------------------------------------------------
+# Nitro's "node-server" preset (Nuxt's default) bundles its own runtime
+# dependencies into .output/server, so the final image only needs Node and
+# that directory - no node_modules, no package manager, no source code.
+FROM node:${NODE_VERSION} AS runtime
+
+# Baked in by scripts/setup/publish.sh via --version; defaults to "dev" for
+# plain local builds.
+ARG VERSION=dev
+LABEL org.opencontainers.image.title="Colossus" \
+      org.opencontainers.image.description="Web-based graphical interface for Moleship" \
+      org.opencontainers.image.source="https://github.com/moleship-org/colossus" \
+      org.opencontainers.image.version="${VERSION}"
+
+ENV NODE_ENV=production \
+    NITRO_HOST=0.0.0.0 \
+    NITRO_PORT=3000
+
+WORKDIR /app
+
+RUN addgroup -S colossus \
+ && adduser -S colossus -G colossus
+
+COPY --from=build --chown=colossus:colossus /app/.output ./.output
+
+USER colossus
+EXPOSE 3000
+
+ENTRYPOINT ["node", ".output/server/index.mjs"]

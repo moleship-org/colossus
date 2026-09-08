@@ -1,0 +1,50 @@
+# Podman Quadlet unit for Colossus.
+#
+# Install (as root):
+#   install -Dm644 colossus.container /etc/containers/systemd/colossus.container
+#   systemctl daemon-reload
+#   systemctl start colossus.service
+#
+# Quadlet applies the [Install] section below itself at daemon-reload time,
+# so the service starts on boot automatically once the unit file is in
+# place - there is no separate "systemctl enable" step (and none is valid:
+# generated/transient units cannot be enabled).
+#
+# See scripts/quick-setup.sh and scripts/setup/*.sh for an automated install.
+
+[Unit]
+Description=Colossus - Web UI for Moleship
+Documentation=https://github.com/moleship-org/colossus
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+ContainerName=colossus
+Image=ghcr.io/moleship-org/colossus:latest
+AutoUpdate=registry
+
+# Moleship is expected to run directly on the host. `host.containers.internal`
+# lets the container reach it without sharing the host network namespace.
+# Override via /etc/colossus/colossus.env, which install.sh always creates
+# (Quadlet's EnvironmentFile does not support systemd's "optional file" "-"
+# prefix, so this file must exist).
+Environment=NUXT_API_BASE=http://host.containers.internal:5000/api/v1
+EnvironmentFile=/etc/colossus/colossus.env
+AddHost=host.containers.internal:host-gateway
+
+PublishPort=8080:3000
+
+HealthCmd=wget -q -O- http://127.0.0.1:3000/ >/dev/null || exit 1
+HealthInterval=30s
+HealthRetries=3
+HealthStartPeriod=10s
+HealthTimeout=5s
+
+NoNewPrivileges=true
+
+[Service]
+Restart=always
+TimeoutStartSec=60
+
+[Install]
+WantedBy=multi-user.target
