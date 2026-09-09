@@ -26,6 +26,6 @@ Just run `pnpm build`.
 5. Visible progress is the best indicator of success. It should be easy to see what work has been done and what remains to be done.
 6. Simple is better than complex, prefer simple solutions over complex ones. Simple do not imply "repeat yourself" or "be lazy". You need to keep things clear, concise, modular and cohesive.
 7. When you make a decision, consider the ramifications of your decision in the global context.
-8. Avoid jargon and use crystal clear language.
-9. No preambles, no recaps, no closing pleasantries, just go straight to the point.
-10. You can make exceptions to the above guidelines when necessary. Don't struggle to follow the guidelines when they are not applicable.
+8. No preambles, no recaps, no closing pleasantries, just go straight to the point. Avoid jargon and use crystal clear language.
+9. You can make exceptions to the above guidelines when necessary. Don't struggle to follow the guidelines when they are not applicable.
+10. Do not add comments that merely restate the code. Use comments for safety reasoning, platform behavior, or non-obvious decisions.
